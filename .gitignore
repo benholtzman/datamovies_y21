@@ -1,0 +1,5 @@
+*.sco
+*.wav
+*.avi
+*checkpoint*
+*.pyc

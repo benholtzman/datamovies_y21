@@ -1,6 +1,6 @@
 name: datamovies
 dependencies:
-  - python=3.10.9
+  - python=3.10
   - matplotlib
   - conda-forge::numpy
   - pandas

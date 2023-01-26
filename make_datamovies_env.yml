@@ -6,4 +6,7 @@ dependencies:
   - pandas
   - jupyterlab
   - librosa
+  - scipy
+  - conda-forge::resampy
+
 

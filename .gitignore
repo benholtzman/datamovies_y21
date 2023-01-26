@@ -3,3 +3,4 @@
 *.avi
 *checkpoint*
 *.pyc
+.*.swp

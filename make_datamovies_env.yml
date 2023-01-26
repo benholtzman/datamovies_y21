@@ -1,0 +1,9 @@
+name: datamovies
+dependencies:
+  - python=3.10.9
+  - matplotlib
+  - conda-forge::numpy
+  - pandas
+  - jupyterlab
+  - librosa
+

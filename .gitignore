@@ -4,3 +4,7 @@
 *checkpoint*
 *.pyc
 .*.swp
+./data_nogit
+./data_nogit/*
+./output_nogit
+./output_nogit/*

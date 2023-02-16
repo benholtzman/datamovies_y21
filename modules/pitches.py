@@ -15,7 +15,7 @@ def note2freq(k,v,f0):
 def intervals2elements(intervals):
     x = np.cumsum(intervals)
     elements = [0]
-    for val in x[:-1]:
+    for val in x:
         elements.append(val)
     elements = np.array(elements)
     return elements
@@ -23,7 +23,11 @@ def intervals2elements(intervals):
 # ==========================================================
 # data base for pitches to connect names to pitches,
 # C4 is just a handy reference note:
-pitch_classes = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B']
+def make_pitch_classes():
+    pitch_classes = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B']
+    return pitch_classes
+
+pitch_classes = make_pitch_classes()
 
 def pitch_dict():
     C4 = 440.0 * 2**(3/12-1)
@@ -86,7 +90,7 @@ def makePitchRing(indexes):
     x = r*np.sin(circle)
     y = r*np.cos(circle)
 
-    # the note locations.
+    # the note locations. 
     base_dots = np.linspace(0,2*np.pi,13)
     xd = r*np.sin(base_dots)
     yd = r*np.cos(base_dots)
@@ -97,10 +101,9 @@ def makePitchRing(indexes):
     yt = r*np.cos(base_dots)
 
     # ========================
-    # THIS probably won't let it be embedded in another figure !
-    #fig1 = plt.figure()
-    #ax1 = fig1.add_subplot(111, aspect='equal')
-    ax1 = plt.add_subplot(111, aspect='equal')
+    fig1 = plt.figure()
+    ax1 = fig1.add_subplot(111, aspect='equal')
+
     # (0) plot a filled square with a filled circle in it...
     # patches.Rectangle((x,y,lower left corner),width,height)
     #ax1.add_patch(patches.Rectangle((0.1, 0.1),0.5,0.5,facecolor="red"))
@@ -111,12 +114,58 @@ def makePitchRing(indexes):
 
     radius_norm = 0.08  # radius normalized, scaled to size of box
 
-    for ind,interval in enumerate(indexes):
+    for ind,key_ind in enumerate(indexes):
         # print(ind,interval)
-        ax1.add_patch(patches.Circle((xd[interval], yd[interval]),radius_norm,facecolor="red"))
-        ax1.text(xt[interval], yt[interval],pitch_classes[interval])
+        ax1.add_patch(patches.Circle((xd[key_ind], yd[key_ind]),radius_norm,facecolor="yellow")) 
+        ax1.text(xt[key_ind], yt[key_ind],pitch_classes[key_ind])
+        if ind==0:
+            ax1.add_patch(patches.Circle((xd[key_ind], yd[key_ind]),radius_norm,facecolor="red")) 
+            ax1.text(xt[key_ind], yt[key_ind],pitch_classes[key_ind])
 
+        
     ax1.get_xaxis().set_visible(False)
     ax1.get_yaxis().set_visible(False)
-    #plt.show()
-    return ax1
+    plt.show()
+
+
+# Object version for multiple rings in subplots: 
+# def makePitchRing(indexes):
+#     circle = np.linspace(0,2*np.pi,64)
+#     r = 1.0
+#     x = r*np.sin(circle)
+#     y = r*np.cos(circle)
+
+#     # the note locations.
+#     base_dots = np.linspace(0,2*np.pi,13)
+#     xd = r*np.sin(base_dots)
+#     yd = r*np.cos(base_dots)
+
+#     # the text locations
+#     r = 1.15
+#     xt = r*np.sin(base_dots)
+#     yt = r*np.cos(base_dots)
+
+#     # ========================
+#     # THIS probably won't let it be embedded in another figure !
+#     #fig1 = plt.figure()
+#     #ax1 = fig1.add_subplot(111, aspect='equal')
+#     ax1 = plt.add_subplot(111, aspect='equal')
+#     # (0) plot a filled square with a filled circle in it...
+#     # patches.Rectangle((x,y,lower left corner),width,height)
+#     #ax1.add_patch(patches.Rectangle((0.1, 0.1),0.5,0.5,facecolor="red"))
+
+#     ax1.add_patch(patches.Rectangle((-1.25, -1.25),2.5,2.5,facecolor=[0.6, 0.6, 0.6]))
+#     ax1.plot(x,y,'k-')
+#     ax1.plot(xd,yd,'w.')
+
+#     radius_norm = 0.08  # radius normalized, scaled to size of box
+
+#     for ind,interval in enumerate(indexes):
+#         # print(ind,interval)
+#         ax1.add_patch(patches.Circle((xd[interval], yd[interval]),radius_norm,facecolor="red"))
+#         ax1.text(xt[interval], yt[interval],pitch_classes[interval])
+
+#     ax1.get_xaxis().set_visible(False)
+#     ax1.get_yaxis().set_visible(False)
+#     #plt.show()
+#     return ax1

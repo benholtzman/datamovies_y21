@@ -9,7 +9,7 @@ import matplotlib.patches as patches
 # k is the integer element in a chromatic scale
 # v is the shift in octave, up(+) or down(-)
 # f0 is the root note of the scale.
-def note2freq(k, v, f0)
+def note2freq(k, v, f0):
     """
     Convert a note number (given as key and value) to a frequency.
 

@@ -3,7 +3,7 @@
 *.avi
 *checkpoint*
 *.pyc
-.*.swp
+*.swp
 ./data_nogit
 ./data_nogit/*
 ./output_nogit

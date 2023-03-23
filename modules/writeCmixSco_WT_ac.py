@@ -50,6 +50,12 @@ def writesco(tones_dict: dict, base_name: str) -> str:
     f_out = open("./" + score_name, "w")
     # YOU MUST DELETE THE SOUND FILE BEFORE RUNNING (either with python or with -clobber )
     f_out.write('set_option("clobber = on")')
+    # for Linux users:
+    # run `aplay --list-devices` in the terminal 
+    # find which card # and device # your 'speaker' is
+    # then uncomment the following line and replace the two numbers
+    # with card # and device #
+    #f_out.write('set_option("device=plughw:0,2")')
     f_out.write("rtsetparams(44100, 2)\n")
     f_out.write("reset(44100)\n")
     f_out.write('load("WAVETABLE")\n')

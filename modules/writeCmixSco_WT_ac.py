@@ -1,5 +1,6 @@
 # GENERATE THE RTcmix score ! (alternate to generating the midi score)
 import subprocess as sp
+from distutils.spawn import find_executable
 
 
 def writesco(tones_dict: dict, base_name: str) -> str:
@@ -56,7 +57,6 @@ def writesco(tones_dict: dict, base_name: str) -> str:
 
     # ----------------------CHECK IF CMIX COMMAND IS INSTALLED-----------------------
     # only use rtoutput if CMIX command is found.
-    cmixStatus, cmixResult = sp.getstatusoutput("CMIX")
     # the cmixInstalled variable can also be passed from the notebook
     # in that is case, the output of sp.getstatusoutput("CMIX") is overridden
     if "cmixInstalled" in tones_dict:
@@ -64,6 +64,8 @@ def writesco(tones_dict: dict, base_name: str) -> str:
             cmixStatus = 0
         else:
             cmixStatus = 127
+    else:
+        cmixStatus, cmixResult = sp.getstatusoutput("CMIX")
 
     if cmixStatus == 0:
         output_string = 'rtoutput("' + base_name + '.wav")\n'
